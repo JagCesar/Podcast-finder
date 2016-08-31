@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		FC80EFF01D76C54800F1F028 /* ItunesSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC80EFEF1D76C54800F1F028 /* ItunesSearch.swift */; };
+		FC80EFF51D76CAD100F1F028 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC80EFF41D76CAD100F1F028 /* Alamofire.framework */; };
+		FC80EFF81D76DD6300F1F028 /* PodcastSearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC80EFF71D76DD6300F1F028 /* PodcastSearchResultCollectionViewCell.swift */; };
 		FCD63F631D76B458002A0FF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD63F621D76B458002A0FF2 /* Assets.xcassets */; };
 		FCD63F6A1D76B458002A0FF2 /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FCD63F691D76B458002A0FF2 /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FCD63F6F1D76B458002A0FF2 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD63F6E1D76B458002A0FF2 /* Messages.framework */; };
@@ -42,6 +44,8 @@
 
 /* Begin PBXFileReference section */
 		FC80EFEF1D76C54800F1F028 /* ItunesSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItunesSearch.swift; path = iTunes/ItunesSearch.swift; sourceTree = "<group>"; };
+		FC80EFF41D76CAD100F1F028 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Alamofire.framework; sourceTree = "<group>"; };
+		FC80EFF71D76DD6300F1F028 /* PodcastSearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastSearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		FCD63F5F1D76B458002A0FF2 /* messageApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = messageApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD63F621D76B458002A0FF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FCD63F641D76B458002A0FF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,6 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCD63F6F1D76B458002A0FF2 /* Messages.framework in Frameworks */,
+				FC80EFF51D76CAD100F1F028 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,12 +78,20 @@
 			name = iTunes;
 			sourceTree = "<group>";
 		};
+		FC80EFF31D76CAB600F1F028 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC80EFF41D76CAD100F1F028 /* Alamofire.framework */,
+				FCD63F6E1D76B458002A0FF2 /* Messages.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FCD63F581D76B457002A0FF2 = {
 			isa = PBXGroup;
 			children = (
 				FCD63F611D76B458002A0FF2 /* messageApplication */,
 				FCD63F701D76B458002A0FF2 /* MessagesExtension */,
-				FCD63F6D1D76B458002A0FF2 /* Frameworks */,
 				FCD63F601D76B458002A0FF2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,22 +114,16 @@
 			path = messageApplication;
 			sourceTree = "<group>";
 		};
-		FCD63F6D1D76B458002A0FF2 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				FCD63F6E1D76B458002A0FF2 /* Messages.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		FCD63F701D76B458002A0FF2 /* MessagesExtension */ = {
 			isa = PBXGroup;
 			children = (
+				FC80EFF31D76CAB600F1F028 /* Frameworks */,
 				FCD63F761D76B458002A0FF2 /* Assets.xcassets */,
 				FCD63F781D76B458002A0FF2 /* Info.plist */,
 				FC80EFF21D76C55B00F1F028 /* iTunes */,
 				FCD63F731D76B458002A0FF2 /* MainInterface.storyboard */,
 				FCD63F711D76B458002A0FF2 /* MessagesViewController.swift */,
+				FC80EFF71D76DD6300F1F028 /* PodcastSearchResultCollectionViewCell.swift */,
 			);
 			path = MessagesExtension;
 			sourceTree = "<group>";
@@ -148,6 +155,7 @@
 				FCD63F651D76B458002A0FF2 /* Sources */,
 				FCD63F661D76B458002A0FF2 /* Frameworks */,
 				FCD63F671D76B458002A0FF2 /* Resources */,
+				FC80EFF61D76CAFE00F1F028 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -219,12 +227,31 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		FC80EFF61D76CAFE00F1F028 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FCD63F651D76B458002A0FF2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				FCD63F721D76B458002A0FF2 /* MessagesViewController.swift in Sources */,
+				FC80EFF81D76DD6300F1F028 /* PodcastSearchResultCollectionViewCell.swift in Sources */,
 				FC80EFF01D76C54800F1F028 /* ItunesSearch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,6 +374,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				DEVELOPMENT_TEAM = UACPD8D292;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MessagesExtension",
+				);
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = se.jagcesar.messageApplication.MessagesExtension;
@@ -361,6 +392,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				DEVELOPMENT_TEAM = UACPD8D292;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MessagesExtension",
+				);
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = se.jagcesar.messageApplication.MessagesExtension;

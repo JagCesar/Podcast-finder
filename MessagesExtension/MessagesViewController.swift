@@ -25,6 +25,15 @@ class MessagesViewController: MSMessagesAppViewController {
         // Do any additional setup after loading the view.
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        ItunesSearch.searchPodcast(term: "accidental") { [weak self] (results, error) in
+            self?.collectionViewDataSource.items = results ?? []
+            self?.collectionView.reloadData()
+        }
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -88,12 +97,14 @@ class MessagesViewController: MSMessagesAppViewController {
 }
 
 class CollectionViewDataSource: NSObject, UICollectionViewDataSource {
+    var items: [PodcastSearchResult] = []
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return items.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PodcastSearchResultCollectionViewCell
+        cell.podcastSearchResult = items[indexPath.row]
         return cell
     }
 }
