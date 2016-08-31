@@ -103,8 +103,10 @@ class CollectionViewDataSource: NSObject, UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PodcastSearchResultCollectionViewCell
-        cell.podcastSearchResult = items[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        if let cell = cell as? PodcastSearchResultCollectionViewCell {
+            cell.podcastSearchResult = items[indexPath.row]
+        }
         return cell
     }
 }
