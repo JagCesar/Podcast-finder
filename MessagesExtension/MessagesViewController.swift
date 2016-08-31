@@ -128,9 +128,9 @@ class MessagesViewController: MSMessagesAppViewController, PodcastSelectedDelega
 //                layout.trailingCaption = "Trailing caption"
                 layout.subcaption = selectedPodcast.trackCount + " episodes"
 //                layout.trailingSubcaption = "Trailing subcaption"
-                
+
                 message.layout = layout
-                
+
                 self?.activeConversation?.insert(message, completionHandler: nil)
         }
     }
