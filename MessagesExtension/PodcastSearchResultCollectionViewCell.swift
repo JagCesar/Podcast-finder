@@ -21,7 +21,7 @@ class PodcastSearchResultCollectionViewCell: UICollectionViewCell {
     var podcastSearchResult: PodcastSearchResult? {
         didSet {
             guard let podcastSearchResult = podcastSearchResult else { return }
-            Alamofire.request(URLRequest(url: podcastSearchResult.artworkUrl60))
+            Alamofire.request(URLRequest(url: podcastSearchResult.artworkUrl100))
                 .response { [weak self] request, response, data, error in
                     if let data = data {
                         self?.imageView.image = UIImage(data: data)

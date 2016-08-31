@@ -8,8 +8,13 @@
 
 import UIKit
 import Messages
+import Alamofire
 
-class MessagesViewController: MSMessagesAppViewController {
+protocol PodcastSelectedDelegate: class {
+    func podcastSelected(indexPath: IndexPath)
+}
+
+class MessagesViewController: MSMessagesAppViewController, PodcastSelectedDelegate {
 
     @IBOutlet var collectionView: UICollectionView! {
         didSet {
@@ -23,6 +28,8 @@ class MessagesViewController: MSMessagesAppViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+
+        collectionViewDelegate.podcastSelectedDelegate = self
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -94,6 +101,39 @@ class MessagesViewController: MSMessagesAppViewController {
             false
         }
     }
+
+    // MARK: - PodcastSelectedDelegate
+
+    func podcastSelected(indexPath: IndexPath) {
+        let message = MSMessage()
+        let selectedPodcast = collectionViewDataSource.items[indexPath.item]
+
+        Alamofire.request(URLRequest(url: selectedPodcast.artworkUrl600))
+            .response { [weak self] request, response, data, error in
+                var image: UIImage?
+
+                if let data = data {
+                    image = UIImage(data: data)
+                }
+
+                message.url = selectedPodcast.feedUrl
+                message.accessibilityLabel = "Here's a great podcast"
+
+                let layout = MSMessageTemplateLayout()
+                layout.image = image
+
+//                layout.imageTitle = selectedPodcast.collectionName
+//                layout.imageSubtitle = "Image subtitle"
+                layout.caption = selectedPodcast.collectionName
+//                layout.trailingCaption = "Trailing caption"
+                layout.subcaption = selectedPodcast.trackCount + " episodes"
+//                layout.trailingSubcaption = "Trailing subcaption"
+                
+                message.layout = layout
+                
+                self?.activeConversation?.insert(message, completionHandler: nil)
+        }
+    }
 }
 
 class CollectionViewDataSource: NSObject, UICollectionViewDataSource {
@@ -112,5 +152,8 @@ class CollectionViewDataSource: NSObject, UICollectionViewDataSource {
 }
 
 class CollectionViewDelegate: NSObject, UICollectionViewDelegate {
-
+    weak var podcastSelectedDelegate: PodcastSelectedDelegate?
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        podcastSelectedDelegate?.podcastSelected(indexPath: indexPath)
+    }
 }

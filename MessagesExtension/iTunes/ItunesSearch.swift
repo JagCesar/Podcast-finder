@@ -35,6 +35,7 @@ class PodcastSearchResult {
     let artworkUrl100: URL
     let artworkUrl600: URL
     let collectionName: String
+    let trackCount: String
 
     init?(dictionary: [String: AnyObject]) {
         guard let feedUrlString = dictionary["feedUrl"] as? String,
@@ -47,7 +48,8 @@ class PodcastSearchResult {
             let artworkUrl100 = URL(string: artworkUrl100String),
             let artworkUrl600String = dictionary["artworkUrl600"] as? String,
             let artworkUrl600 = URL(string: artworkUrl600String),
-            let collectionName = dictionary["collectionName"] as? String else {
+            let collectionName = dictionary["collectionName"] as? String,
+            let trackCount = dictionary["trackCount"] as? NSNumber else {
                 return nil
         }
         self.feedUrl = feedUrl
@@ -56,5 +58,6 @@ class PodcastSearchResult {
         self.artworkUrl100 = artworkUrl100
         self.artworkUrl600 = artworkUrl600
         self.collectionName = collectionName
+        self.trackCount = trackCount.stringValue
     }
 }
