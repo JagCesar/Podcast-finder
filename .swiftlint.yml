@@ -1,0 +1,7 @@
+disabled_rules:
+  - line_length
+  - conditional_binding_cascade
+included:
+
+excluded:
+  - Carthage/
