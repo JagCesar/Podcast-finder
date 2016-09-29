@@ -142,6 +142,7 @@ class MessagesViewController: MSMessagesAppViewController, PodcastSelectedDelega
                 message.layout = layout
 
                 self?.activeConversation?.insert(message, completionHandler: nil)
+                self?.requestPresentationStyle(.compact)
             })
     }
 }
