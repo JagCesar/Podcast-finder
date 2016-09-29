@@ -22,7 +22,8 @@ class PodcastSearchResultCollectionViewCell: UICollectionViewCell {
         didSet {
             guard let podcastSearchResult = podcastSearchResult else { return }
 
-            imageView.af_setImage(withURL: podcastSearchResult.artworkUrl100,
+            imageView.af_setImage(withURL: podcastSearchResult.artworkUrl600,
+                                  filter: ScaledToSizeFilter(size: CGSize(width: 100, height: 100)),
                                   imageTransition: UIImageView.ImageTransition.crossDissolve(0.24),
                                   runImageTransitionIfCached: false)
         }
