@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Alamofire
+import AlamofireImage
 
 class PodcastSearchResultCollectionViewCell: UICollectionViewCell {
     @IBOutlet var imageView: UIImageView!
@@ -22,12 +22,9 @@ class PodcastSearchResultCollectionViewCell: UICollectionViewCell {
         didSet {
             guard let podcastSearchResult = podcastSearchResult else { return }
 
-            Alamofire.request(podcastSearchResult.artworkUrl100)
-                .responseData { [weak self] response in
-                    if let data = response.result.value {
-                        self?.imageView.image = UIImage(data: data)
-                    }
-            }
+            imageView.af_setImage(withURL: podcastSearchResult.artworkUrl100,
+                                  imageTransition: UIImageView.ImageTransition.crossDissolve(0.24),
+                                  runImageTransitionIfCached: false)
         }
     }
 }

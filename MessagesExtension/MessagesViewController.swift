@@ -109,30 +109,24 @@ class MessagesViewController: MSMessagesAppViewController, PodcastSelectedDelega
         let selectedPodcast = collectionViewDataSource.items[indexPath.item]
 
         Alamofire.request(URLRequest(url: selectedPodcast.artworkUrl600))
-            .responseData { [weak self] response in
-                var image: UIImage?
-
-                if let data = response.result.value {
-                    image = UIImage(data: data)
-                }
-
+            .responseImage(completionHandler: { [weak self] response in
                 message.url = selectedPodcast.feedUrl
                 message.accessibilityLabel = "Here's a great podcast"
 
                 let layout = MSMessageTemplateLayout()
-                layout.image = image
+                layout.image = response.result.value
 
-//                layout.imageTitle = selectedPodcast.collectionName
-//                layout.imageSubtitle = "Image subtitle"
+                //                layout.imageTitle = selectedPodcast.collectionName
+                //                layout.imageSubtitle = "Image subtitle"
                 layout.caption = selectedPodcast.collectionName
-//                layout.trailingCaption = "Trailing caption"
+                //                layout.trailingCaption = "Trailing caption"
                 layout.subcaption = selectedPodcast.trackCount + " episodes"
-//                layout.trailingSubcaption = "Trailing subcaption"
+                //                layout.trailingSubcaption = "Trailing subcaption"
 
                 message.layout = layout
 
                 self?.activeConversation?.insert(message, completionHandler: nil)
-        }
+            })
     }
 }
 
