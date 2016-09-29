@@ -11,6 +11,7 @@ import AlamofireImage
 
 class PodcastSearchResultCollectionViewCell: UICollectionViewCell {
     @IBOutlet var imageView: UIImageView!
+    private let placeholder = UIImage(named: "placeholder")
 
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -23,6 +24,7 @@ class PodcastSearchResultCollectionViewCell: UICollectionViewCell {
             guard let podcastSearchResult = podcastSearchResult else { return }
 
             imageView.af_setImage(withURL: podcastSearchResult.artworkUrl600,
+                                  placeholderImage: placeholder,
                                   filter: ScaledToSizeFilter(size: CGSize(width: 100, height: 100)),
                                   imageTransition: UIImageView.ImageTransition.crossDissolve(0.24),
                                   runImageTransitionIfCached: false)
