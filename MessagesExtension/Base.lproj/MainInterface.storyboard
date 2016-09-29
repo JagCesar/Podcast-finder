@@ -72,6 +72,7 @@
                     <size key="freeformSize" width="320" height="528"/>
                     <connections>
                         <outlet property="collectionView" destination="uls-kQ-bgd" id="XeK-tO-kfg"/>
+                        <outlet property="searchBar" destination="9Gr-HU-pLR" id="jV9-k5-Uhe"/>
                         <outlet property="searchDisplayController" destination="RG2-py-RAR" id="aOT-eT-vjj"/>
                     </connections>
                 </viewController>

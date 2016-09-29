@@ -14,7 +14,7 @@ protocol PodcastSelectedDelegate: class {
     func podcastSelected(indexPath: IndexPath)
 }
 
-class MessagesViewController: MSMessagesAppViewController, PodcastSelectedDelegate {
+class MessagesViewController: MSMessagesAppViewController, PodcastSelectedDelegate, UISearchBarDelegate {
 
     @IBOutlet var collectionView: UICollectionView! {
         didSet {
@@ -22,6 +22,7 @@ class MessagesViewController: MSMessagesAppViewController, PodcastSelectedDelega
             collectionView.delegate = collectionViewDelegate
         }
     }
+    @IBOutlet var searchBar: UISearchBar!
     private let collectionViewDataSource: CollectionViewDataSource = CollectionViewDataSource()
     private let collectionViewDelegate: CollectionViewDelegate = CollectionViewDelegate()
 
@@ -34,11 +35,6 @@ class MessagesViewController: MSMessagesAppViewController, PodcastSelectedDelega
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        ItunesSearch.searchPodcast(term: "accidental") { [weak self] (results, error) in
-            self?.collectionViewDataSource.items = results ?? []
-            self?.collectionView.reloadData()
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -94,11 +90,31 @@ class MessagesViewController: MSMessagesAppViewController, PodcastSelectedDelega
         // Use this method to finalize any behaviors associated with the change in presentation style.
         switch presentationStyle {
         case .expanded:
-            false
+            searchBar.becomeFirstResponder()
         case .compact:
             fallthrough
         default:
             false
+        }
+    }
+
+    // MARK: - UISearchBarDelegate
+
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        if presentationStyle == .expanded {
+            return true
+        } else {
+            requestPresentationStyle(.expanded)
+            return false
+        }
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let needle = searchBar.text else { return }
+        searchBar.resignFirstResponder()
+        ItunesSearch.searchPodcast(term: needle) { [weak self] (results, error) in
+            self?.collectionViewDataSource.items = results ?? []
+            self?.collectionView.reloadData()
         }
     }
 
