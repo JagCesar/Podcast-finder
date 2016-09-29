@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		FC80EFF01D76C54800F1F028 /* ItunesSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC80EFEF1D76C54800F1F028 /* ItunesSearch.swift */; };
-		FC80EFF51D76CAD100F1F028 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC80EFF41D76CAD100F1F028 /* Alamofire.framework */; };
 		FC80EFF81D76DD6300F1F028 /* PodcastSearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC80EFF71D76DD6300F1F028 /* PodcastSearchResultCollectionViewCell.swift */; };
+		FCC900A71D9CF8BB0068A782 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC900A61D9CF8BB0068A782 /* Alamofire.framework */; };
 		FCD63F631D76B458002A0FF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD63F621D76B458002A0FF2 /* Assets.xcassets */; };
 		FCD63F6A1D76B458002A0FF2 /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FCD63F691D76B458002A0FF2 /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FCD63F6F1D76B458002A0FF2 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD63F6E1D76B458002A0FF2 /* Messages.framework */; };
@@ -44,8 +44,8 @@
 
 /* Begin PBXFileReference section */
 		FC80EFEF1D76C54800F1F028 /* ItunesSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItunesSearch.swift; path = iTunes/ItunesSearch.swift; sourceTree = "<group>"; };
-		FC80EFF41D76CAD100F1F028 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Alamofire.framework; sourceTree = "<group>"; };
 		FC80EFF71D76DD6300F1F028 /* PodcastSearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastSearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
+		FCC900A61D9CF8BB0068A782 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = SOURCE_ROOT; };
 		FCD63F5F1D76B458002A0FF2 /* messageApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = messageApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD63F621D76B458002A0FF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FCD63F641D76B458002A0FF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -63,7 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCD63F6F1D76B458002A0FF2 /* Messages.framework in Frameworks */,
-				FC80EFF51D76CAD100F1F028 /* Alamofire.framework in Frameworks */,
+				FCC900A71D9CF8BB0068A782 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,7 +81,7 @@
 		FC80EFF31D76CAB600F1F028 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FC80EFF41D76CAD100F1F028 /* Alamofire.framework */,
+				FCC900A61D9CF8BB0068A782 /* Alamofire.framework */,
 				FCD63F6E1D76B458002A0FF2 /* Messages.framework */,
 			);
 			name = Frameworks;
@@ -392,6 +392,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MessagesExtension",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -410,6 +411,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MessagesExtension",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";

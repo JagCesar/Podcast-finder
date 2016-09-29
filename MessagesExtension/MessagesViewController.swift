@@ -109,10 +109,10 @@ class MessagesViewController: MSMessagesAppViewController, PodcastSelectedDelega
         let selectedPodcast = collectionViewDataSource.items[indexPath.item]
 
         Alamofire.request(URLRequest(url: selectedPodcast.artworkUrl600))
-            .response { [weak self] request, response, data, error in
+            .responseData { [weak self] response in
                 var image: UIImage?
 
-                if let data = data {
+                if let data = response.result.value {
                     image = UIImage(data: data)
                 }
 
