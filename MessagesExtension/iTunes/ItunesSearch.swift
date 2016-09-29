@@ -11,7 +11,12 @@ import Alamofire
 
 class ItunesSearch {
     static func searchPodcast(term: String, completion:@escaping (_ results: [PodcastSearchResult]?, _ error: NSError?) -> Void) {
-        let request = URLRequest(url: URL(string: "https://itunes.apple.com/search?media=podcast&entity=podcast&term=\(term)")!)
+        guard let escapedTerm = term.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed) else {
+            completion(nil, NSError(domain: "se.jagcesar", code: 1, userInfo: nil))
+            return
+        }
+
+        let request = URLRequest(url: URL(string: "https://itunes.apple.com/search?media=podcast&entity=podcast&term=\(escapedTerm)")!)
 
         Alamofire.request(request)
             .responseJSON { response in
