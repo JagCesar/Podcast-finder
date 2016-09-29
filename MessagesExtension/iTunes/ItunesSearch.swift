@@ -30,6 +30,7 @@ class ItunesSearch {
 
 class PodcastSearchResult {
     let feedUrl: URL
+    let itunesUrl: URL
     let artworkUrl30: URL
     let artworkUrl60: URL
     let artworkUrl100: URL
@@ -40,6 +41,8 @@ class PodcastSearchResult {
     init?(dictionary: [String: AnyObject]) {
         guard let feedUrlString = dictionary["feedUrl"] as? String,
             let feedUrl = URL(string: feedUrlString),
+            let itunesUrlString = dictionary["trackViewUrl"] as? String,
+            let itunesUrl = URL(string: itunesUrlString),
             let artworkUrl30String = dictionary["artworkUrl30"] as? String,
             let artworkUrl30 = URL(string: artworkUrl30String),
             let artworkUrl60String = dictionary["artworkUrl60"] as? String,
@@ -53,6 +56,7 @@ class PodcastSearchResult {
                 return nil
         }
         self.feedUrl = feedUrl
+        self.itunesUrl = itunesUrl
         self.artworkUrl30 = artworkUrl30
         self.artworkUrl60 = artworkUrl60
         self.artworkUrl100 = artworkUrl100
