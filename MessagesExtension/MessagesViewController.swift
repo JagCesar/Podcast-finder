@@ -23,6 +23,9 @@ class MessagesViewController: MSMessagesAppViewController, PodcastSelectedDelega
         }
     }
     @IBOutlet var searchBar: UISearchBar!
+    @IBOutlet var onboardingTitle: UILabel!
+    @IBOutlet var onboardingSubtitle: UILabel!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     private let collectionViewDataSource: CollectionViewDataSource = CollectionViewDataSource()
     private let collectionViewDelegate: CollectionViewDelegate = CollectionViewDelegate()
 
@@ -111,8 +114,18 @@ class MessagesViewController: MSMessagesAppViewController, PodcastSelectedDelega
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let needle = searchBar.text else { return }
+
+        collectionViewDataSource.items = []
+        collectionView.reloadData()
+
+        activityIndicator.startAnimating()
+
+        onboardingTitle.isHidden = true
+        onboardingSubtitle.isHidden = true
+
         searchBar.resignFirstResponder()
         ItunesSearch.searchPodcast(term: needle) { [weak self] (results, error) in
+            self?.activityIndicator.stopAnimating()
             self?.collectionViewDataSource.items = results ?? []
             self?.collectionView.reloadData()
         }
